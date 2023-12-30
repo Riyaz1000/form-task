@@ -383,9 +383,3 @@ btn5El.addEventListener("click", () => {
 //   }
 
 // }
-
-const btn0El = document.getElementById("btn-0");
-
-btn0El.addEventListener("click", () => {
-  btn1El.classList.add("hidden");
-});
