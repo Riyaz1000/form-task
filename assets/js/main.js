@@ -20,6 +20,7 @@ btn1El.addEventListener("click", () => {
     .textContent.trim();
 
   const itemImageElement = document.getElementById("tomato-img").src;
+  const itemBottonEl = document.getElementById("btn-0");
 
   // Display the item name and price (you can customize this part based on your needs)
 
@@ -32,6 +33,7 @@ btn1El.addEventListener("click", () => {
     itemName: itemNameElement,
     itemPrice: finalItemPrice,
     itemImage: itemImageElement,
+    itemButton: itemBottonEl,
   };
 
   console.log(enteredItem);
@@ -281,8 +283,6 @@ function loaded() {
 
   const items = JSON.parse(localStorage.getItem(localStorageKey)); // Retrieve data from localStorage
 
-  console.log("items", items);
-
   if (items && items.length > 0) {
     const tableBody = document.querySelector("#itemDataTable tbody");
 
@@ -311,21 +311,38 @@ function loaded() {
       imageCell.appendChild(image);
       row.appendChild(imageCell);
 
+      //chat gpt
+
       const buttonCell = document.createElement("td");
       const button = document.createElement("button");
       button.textContent = "DELETE";
+      button.style.backgroundColor = "red";
+      button.style.padding = "5px";
+      button.style.color = "white";
+      button.style.borderRadius = "7px";
+
+      button.addEventListener("click", function () {
+        // Handle the delete action here, for example:
+        // Assuming items is the array containing your data
+        items.splice(i, 1); // Remove the item from the array
+        // Optionally, you can update the UI or perform any other necessary actions
+
+        // Remove the corresponding row from the table
+        row.remove();
+      });
+
+      buttonCell.appendChild(button);
       row.appendChild(buttonCell);
 
       tableBody.appendChild(row); // Append the row to the table body
     }
   } else {
-    console.log("No items found in localStorage or the array is empty.");
+    alert("No items found in localStorage or the array is empty.");
   }
 }
 
 //hide next buttin while clicking
 const nextBtnEl = document.getElementById("nxt-btn");
-console.dir(nextBtnEl);
 
 btn1El.addEventListener("click", () => {
   nextBtnEl.hidden = "true";
@@ -350,7 +367,6 @@ btn5El.addEventListener("click", () => {
 //second page
 
 const tableHeadEl = document.getElementById("tableHead");
-console.dir(tableHeadEl);
 
 btn1El.addEventListener("click", () => {
   // tableHeadEl.style.display = "block";
